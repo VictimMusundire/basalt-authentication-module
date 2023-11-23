@@ -22,4 +22,43 @@ docker run --name basalt-keycloak-server --network host -d \
         --db-password=postgres \
         --hostname-strict=false
 ```
-### Dev
+### Ignore the below what what ....
+
+###105
+@SpringBootApplication
+public class SpringCertificationCodeApplication {
+
+    public static void main(String[] args) {
+        SpringApplication.run(SpringCertificationCodeApplication.class, args);
+        System.out.println(compress("abaasass"));
+    }
+
+    private static String compress(String input) {
+        if (input == null || input.isEmpty()) {
+            return ""; // Handle empty or null input
+        }
+
+        StringBuilder compressed = new StringBuilder();
+        int count = 1;
+
+        for (int i = 1; i < input.length(); i++) {
+            if (input.charAt(i) == input.charAt(i - 1)) {
+                count++;
+            } else {
+                compressed.append(input.charAt(i - 1));
+                if (count > 1) {
+                    compressed.append(count);
+                }
+                count = 1;
+            }
+        }
+
+        compressed.append(input.charAt(input.length() - 1));
+        if (count > 1) {
+            compressed.append(count);
+        }
+
+        return compressed.toString();
+    }
+
+}
