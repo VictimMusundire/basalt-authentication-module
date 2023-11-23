@@ -24,7 +24,8 @@ docker run --name basalt-keycloak-server --network host -d \
 ```
 ### Ignore the below what what ....
 
-###105
+### 105
+
 @SpringBootApplication
 public class SpringCertificationCodeApplication {
 
@@ -59,6 +60,63 @@ public class SpringCertificationCodeApplication {
         }
 
         return compressed.toString();
+    }
+
+}
+
+
+---------------------------------------------------------------------------------------------
+
+### 302
+@SpringBootApplication
+public class SpringCertificationCodeApplication {
+
+    public static void main(String[] args) {
+        SpringApplication.run(SpringCertificationCodeApplication.class, args);
+        String[] wordSet = {"listen", "silent", "it", "is"};
+        String[] sentences = {"listen it is silent", "listen it is listen", "silent it is silent", "silent it is listen"};
+
+        System.out.println(Arrays.toString(countSentences(wordSet,sentences)));
+    }
+
+    public static int[] countSentences(String[] wordSet, String[] sentences) {
+
+        int[] result = new int[sentences.length];
+
+        // Build a map to store the frequency of each word in the wordSet
+        Map<String, Integer> wordFrequencyMap = new HashMap<>();
+        for (String word : wordSet) {
+            wordFrequencyMap.put(word, wordFrequencyMap.getOrDefault(word, 0) + 1);
+        }
+
+        // Iterate through each sentence and count the valid sentences
+        for (int i = 0; i < sentences.length; i++) {
+            result[i] = countValidSentences(sentences[i], wordFrequencyMap);
+        }
+
+        return result;
+    }
+
+    private static int countValidSentences(String sentence, Map<String, Integer> wordFrequencyMap) {
+        String[] words = sentence.split(" ");
+        int validSentenceCount = 1;
+
+        // Count the number of valid sentences that can be formed
+        for (String word : words) {
+            if (wordFrequencyMap.containsKey(word) && wordFrequencyMap.get(word) > 0) {
+                wordFrequencyMap.put(word, wordFrequencyMap.get(word) - 1);
+            } else {
+                validSentenceCount = 0;
+                break;
+            }
+        }
+
+        // Restore the original word frequencies
+        for (String word : words) {
+            wordFrequencyMap.put(word, wordFrequencyMap.getOrDefault(word, 0) + 1);
+        }
+
+        return validSentenceCount;
     }
 
 }
