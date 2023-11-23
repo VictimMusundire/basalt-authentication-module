@@ -126,3 +126,11 @@ public class SpringCertificationCodeApplication {
     }
 
 }
+
+
+
+---------------------------------------------------------------------------------------------------------
+
+### 405
+
+A substring is a group of contiguous characters in a string. For instance, all substrings of abc are [a,b,c,ab,bc,abc]. In this challenge you will be given a binary representation of a number. You must determine the total number of substrings present that match the following conditions. 1. The 0's and  1's are
