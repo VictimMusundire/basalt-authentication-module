@@ -133,4 +133,51 @@ public class SpringCertificationCodeApplication {
 
 ### 405
 
-A substring is a group of contiguous characters in a string. For instance, all substrings of abc are [a,b,c,ab,bc,abc]. In this challenge you will be given a binary representation of a number. You must determine the total number of substrings present that match the following conditions. 1. The 0's and  1's are
+A substring is a group of contiguous characters in a string. For instance, all substrings of abc are [a,b,c,ab,bc,abc]. In this challenge you will be given a binary representation of a number. You must determine the total number of substrings present that match the following conditions. 1. The 0's and  1's are grouped consecutively (e.g 01,10,0011,1100,000111,etc). 2. The number of 0's in the substring is equal to the number of 1's in the substring.
+
+As an example, consider the string 001101. The 4 substrings matching the two conditions include [0011,01,10,01]. Note that 01 appears twice, from indexes 1-2 and 4-5. There are other substrings, e.g. 001 and 011 that match the first condition but not the second.
+
+Write a spring boot java function called counting that returns an integer value, the number of substrings of s satisfying the two conditions. counting function has s: a string representation of a binary integer as a parameter.
+
+
+
+@RestController
+public class SubstringCountController {
+
+    @PostMapping("/counting")
+    public int counting(@RequestBody String s) {
+        return countSubstrings(s);
+    }
+
+    private int countSubstrings(String s) {
+        int count = 0;
+
+        for (int i = 0; i < s.length(); i++) {
+            for (int j = i + 2; j <= s.length(); j += 2) {
+                String substring = s.substring(i, j);
+                if (isValidSubstring(substring)) {
+                    count++;
+                }
+            }
+        }
+
+        return count;
+    }
+
+    private boolean isValidSubstring(String substring) {
+        int countZeros = 0;
+        int countOnes = 0;
+
+        for (char c : substring.toCharArray()) {
+            if (c == '0') {
+                countZeros++;
+            } else if (c == '1') {
+                countOnes++;
+            } else {
+                return false; // Non-binary character, invalid substring
+            }
+        }
+
+        return countZeros == countOnes;
+    }
+}
