@@ -26,6 +26,8 @@ docker run --name basalt-keycloak-server --network host -d \
 
 ### 105
 
+Different compression techniques are used in order to reduce the size of the messages sent over the web. An algorithm is designed to compress a given string by describing the total number of consecutive occurences of each character next to it. For example, consider the string "abaasass". Group the consecutive occurence of each character:  'a' occurs one time, 'b' occurs one time, 'a' occurs two times consecutively, 's' occurs one time, 'a' occurs one time 's' occurs two times consecutively. If a character only occurs once, it is added to the compression string. If it occurs consecutive times the character is added to the string followed by an integer representing the number of consecutive occurrences, thus the compressed form of a string is "aba2sas2". Write a spring boot java function called compressedString, the function must return the compressed form of the message. compressedString method takes a string parameter called message and returns a compressed string message. 
+
 @SpringBootApplication
 public class SpringCertificationCodeApplication {
 
@@ -68,6 +70,10 @@ public class SpringCertificationCodeApplication {
 ---------------------------------------------------------------------------------------------
 
 ### 302
+
+Given a set of words and a set of sentences(composed of those words), determine how many sentences can be created by rearranging the letters of each word in each input sentence, where rearranging words is only possible if the resulting word is also present in the input set of words. Example, wordSet = ['listen','silent','it','is'] , sentence = 'listen it is silent'. Note: The words in the set are unique, sentences are composed only of words from the word set and a sentence is composed of words separated by a single ' '. Determine that the letters of listen can be rearranged into silent (i.e these words are anagrams). Those two words can be replaced with each other. The four sentences that can be created are: listen it is silent, listen it is listen, silent it is silent, silent it is listen. Write a spring boot java function called countSentences that has string wordSet[n]:  an array of unique strings and string sentences[m]: an array of strings as parameters, it returns int[]: an array of m integers that denote the number of sentences that can be formed from each sentence.  
+
+
 @SpringBootApplication
 public class SpringCertificationCodeApplication {
 
